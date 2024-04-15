@@ -36,7 +36,7 @@ public class MainController {
     /**
      * Der Baum wird im übergebenem Panel dargestellt.
      * Dazu wird zunächst die alte Zeichnung entfernt.
-     * Im Anschluss wird eine eine internete Hilfsmethode aufgerufen.
+     * Im Anschluss wird eine interne Hilfsmethode aufgerufen.
      * @param panel Das DrawingPanel-Objekt, auf dem gezeichnet wird.
      */
     public void showTree(DrawingPanel panel){

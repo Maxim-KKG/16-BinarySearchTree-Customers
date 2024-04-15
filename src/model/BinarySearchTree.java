@@ -91,7 +91,34 @@ public class BinarySearchTree<ContentType extends ComparableContent<ContentType>
 	 *            
 	 */
 	public void insert(ContentType pContent) {
-		//TODO 01: Implementiere den Algorithmus zum Einfügen eines neuen Objekts.
+		//COMPLETE 01: Implementiere den Algorithmus zum Einfügen eines neuen Objekts.
+		if(pContent == null)
+			return;
+
+		if(isEmpty()) {
+			node = new BSTNode<>(pContent);
+			return;
+		}
+
+		BinarySearchTree<ContentType> insertTree = new BinarySearchTree<>();
+		insertTree.node = new BSTNode<>(pContent);
+		BinarySearchTree<ContentType> traverseTree = this;
+
+		while (!traverseTree.isEmpty()) {
+			if (traverseTree.getLeftTree().isEmpty() && pContent.isLess(traverseTree.getContent())) {
+				traverseTree.node.left = insertTree;
+			} else if (traverseTree.getRightTree().isEmpty() && pContent.isGreater(traverseTree.getContent())) {
+				traverseTree.node.right = insertTree;
+			}
+
+			if(pContent.isLess(traverseTree.getContent())){
+				traverseTree = traverseTree.getLeftTree();
+			} else if(pContent.isGreater(traverseTree.getContent())){
+				traverseTree = traverseTree.getRightTree();
+			} else {
+				return;
+			}
+		}
 	}
 
 	/**
@@ -203,7 +230,19 @@ public class BinarySearchTree<ContentType extends ComparableContent<ContentType>
 	 * 
 	 */
 	public ContentType search(ContentType pContent) {
-		//TODO 03: Implementiere den Algorithmus zum Suchen eines Objekts.
+		//COMPLETE 03: Implementiere den Algorithmus zum Suchen eines Objekts.
+		if(pContent == null)
+			return null;
+		BinarySearchTree<ContentType> help = this;
+		while (!help.isEmpty()){
+			if(pContent.isEqual(help.getContent())){
+				return help.getContent();
+			} else if(pContent.isGreater(help.getContent())){
+				help = help.getRightTree();
+			} else {
+				help = help.getLeftTree();
+			}
+		}
 		return null;
 	}
 
